@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>the5fire-backbone-model-对象中的方法</title>
+</head>
+<body>
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
+<script>
+  (function ($) {
+    var Man = Backbone.Model.extend({
+      initialize: function() {
+        alert('Hey, you create me!');
+      },
+      defaults: {
+        name: '张三',
+        age: '38'
+      },
+      aboutMe: function() {
+        return '我叫' + this.get('name') + ', 今年' + this.get('age') + '岁';
+      }
+    });
+    var man = new Man;
+    alert(man.aboutMe());
+  })(jQuery);
+</script>
+</body>
+</html>

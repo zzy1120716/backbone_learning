@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>the5fire-backbone-model-最简单的对象</title>
+</head>
+<body>
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
+<script>
+  (function ($) {
+    var Man = Backbone.Model.extend({
+      initialize: function() {
+        alert('Hey, you create me!');
+      }
+    });
+    var man = new Man;
+  })(jQuery);
+</script>
+</body>
+</html>

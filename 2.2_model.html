@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>the5fire-backbone-model-对象属性赋值的两种方法</title>
+</head>
+<body>
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
+<script>
+  (function ($) {
+    var Man = Backbone.Model.extend({
+      initialize: function() {
+        alert('Hey, you create me!');
+      },
+      //第一种，直接定义，设置默认值
+      defaults: {
+        name: '张三',
+        age: '38'
+      }
+    });
+
+    var man = new Man;
+    //第二种，赋值时定义
+    man.set({name: 'the5fire', age: '10'});
+    alert(man.get('name'));
+  })(jQuery);
+</script>
+</body>
+</html>

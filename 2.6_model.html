@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>the5fire-backbone-model-和服务器进行交互，对象的保存和获取</title>
+</head>
+<body>
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
+<script>
+  (function ($) {
+    var Man = Backbone.Model.extend({
+      //url: '/man/',
+      url: 'man.php',
+      initialize: function() {
+        alert('Hey, you create me!');
+        //初始化时绑定监听
+        this.bind("change:name", function() {
+          var name = this.get("name");
+          alert("你改变了name属性为：" + name);
+        });
+
+        this.bind("invalid", function(model, error) {
+          alert(error);
+        });
+      },
+      defaults: {
+        name: '张三',
+        age: '38'
+      },
+      validate: function(attributes) {
+        if(attributes.name == '') {
+          return "name不能为空！";
+        }
+      },
+      aboutMe: function() {
+        return '我叫' + this.get('name') + ', 今年' + this.get('age') + '岁';
+      }
+    });
+    var man = new Man;
+    man.set({name: 'the5fire'});
+
+    //会发送POST到模型对应的url，数据格式为json{"name": "the5fire", "age": 30}
+    man.save();
+
+    //然后接着就是从服务器端获取数据使用方法fetch([options])
+    var man1 = new Man;
+    //第一种情况，如果直接使用fetch方法，
+    //那么他会发送get请求到你model的url中，
+    //你在服务器端可以通过判断是get还是post来进行对应的操作。
+    man1.fetch();
+    //第二种情况，在fetch中加入参数，如下：
+    man1.fetch({
+      //url: '/man/',
+      url: 'man.php',
+      success: function(model, response) {
+        alert('success');
+        //model为获取到的数据
+        alert(model.get('name'));
+      },
+      error: function() {
+        //当返回格式不正确或者是非json数据时，会执行此方法
+        alert('error');
+      }
+    });
+  })(jQuery);
+</script>
+</body>
+</html>
