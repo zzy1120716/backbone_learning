@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>the5fire-backbone-简单例子</title>
+</head>
+<body>
+<a href="#actions">testActions</a>
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
+<script>
+  (function ($) {
+    var AppRouter = Backbone.Router.extend({
+      routes: {
+        "*actions" : "defaultRoute"
+      },
+
+      defaultRoute : function(actions) {
+        alert(actions);
+      }
+    });
+
+    var app_router = new AppRouter;
+
+    Backbone.history.start();
+  })(jQuery);
+</script>
+</body>
+</html>

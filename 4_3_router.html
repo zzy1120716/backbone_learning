@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>the5fire-backbone-手动触发router</title>
+</head>
+<body>
+<a href="#/manual">manual</a>
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
+<script>
+  (function ($) {
+    var AppRouter = Backbone.Router.extend({
+      routes: {
+        "posts/:id" : "getPost",
+        "manual" : "manual",
+        "*actions" : "defaultRoute"
+      },
+
+      getPost: function(id) {
+        alert(id);
+      },
+
+      defaultRoute: function(actions) {
+        alert(actions);
+      },
+
+      manual: function() {
+        alert("call manual");
+        app_router.navigate("/post/" + 404, {trigger: true, replace: true});
+      }
+    });
+
+    var app_router = new AppRouter;
+
+    Backbone.history.start();
+  })(jQuery);
+</script>
+</body>
+</html>

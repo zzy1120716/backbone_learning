@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>the5fire-backbone-使用routes进行传参</title>
+</head>
+<body>
+<a href="#/posts/120">Post 120</a>
+<a href="#/download/user/images/hey.gif">download gif</a>
+<a href="#/dashboard/graph">Load Route/Action View</a>
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
+<script>
+  (function ($) {
+    var AppRouter = Backbone.Router.extend({
+      routes: {
+        "posts/:id" : "getPost",
+        "download/*path" : "downloadFile",
+        ":route/:action" : "loadView",
+        "*actions" : "defaultRoute"
+      },
+
+      getPost: function(id) {
+        alert(id);
+      },
+
+      defaultRoute: function(actions) {
+        alert(actions);
+      },
+
+      downloadFile: function(path) {
+        alert(path);
+      },
+
+      loadView: function(route, action) {
+        alert(route + "_" + action);
+      }
+    });
+
+    var app_router = new AppRouter;
+
+    Backbone.history.start();
+  })(jQuery);
+</script>
+</body>
+</html>
